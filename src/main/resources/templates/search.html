@@ -3,14 +3,14 @@
 <title>Search for the trend</title>
 </head>
 <body>
-<form th:action="@{/rest/manual/search}" method="post" th:object="${myEntity}">
- <div class="modal-body">
-        <div class="form-group">
-            <label for="name">Name</label> <input type="text"
-                class="form-control" id="name" th:field="*{value}"/> 
-        </div>
-        </div>
-
+<form th:action="@{/rest/manual/search/}" method="get" th:object="${loadpage}">
+       <input type="text" name="attribute1" th:field="*{attribute1}"/> 
+       <input type="text" name="attribute2" th:field="*{attribute2}"/> 
+       <input type="text" id="value" th:field="*{value}"/> 
+       <select name="option" th:field="*{option}">
+       <option value="more">more</option> 
+       <option value="less">less</option>
+        </select>
 <input type="submit" value="search"/>
 </form>
 </body>

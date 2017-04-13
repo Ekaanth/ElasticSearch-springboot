@@ -2,6 +2,7 @@ package com.techprimers.elastic.builder;
 
 import java.util.List;
 
+import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,14 +33,22 @@ public class SearchQueryBuilder {
 //                        .field("likecount")
 //                       .field("favoriatecount"));
         
-        QueryBuilder query = QueryBuilders.boolQuery()
-                .should(
-                		 QueryBuilders.rangeQuery(value)
-                        .from(lower)
-                        .to(upper)
-                );
-       
+    	QueryBuilder query = QueryBuilders.boolQuery()
+    	        .should(
+    	                 QueryBuilders.rangeQuery(text)
+    	                .from(lower)
+    	                .to(upper)
+    	        )
+    	        .should(
+    	                 QueryBuilders.rangeQuery(value)
+    	                .from(lower)
+    	                .to(upper)
+    	        );
         
+        
+        System.out.println("=================================");
+        System.out.println(query);        
+        System.out.println("=================================");
         NativeSearchQuery build = new NativeSearchQueryBuilder()
                 .withQuery(query)
                 .build();
